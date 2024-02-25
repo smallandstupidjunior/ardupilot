@@ -371,7 +371,7 @@ void AP_Logger_Backend::validate_WritePrioritisedBlock(const void *pBuffer,
     if (size < 3) {
         AP_HAL::panic("Short prioritised block");
     }
-    if (((uint8_t*)pBuffer)[0] != HEAD_BYTE1 ||
+    if (((uint8_t*)pBuffer)[0] != H ||
         ((uint8_t*)pBuffer)[1] != HEAD_BYTE2) {
         AP_HAL::panic("Not passed a message");
     }
@@ -551,7 +551,20 @@ bool AP_Logger_Backend::Write_VER()
 {
     const AP_FWVersion &fwver = AP::fwversion();
 
-    log_VER pkt{
+      log_VER pkt;
+      pkt.head1=HEAD_BYTE1;
+      pkt.head2=HEAD_BYTE2;
+      pkt.msgid=LOG_VER_MSG;
+      pkt.time_us =AP_HAL::micros64(),
+      pkt.board_type =fwver.board_type,
+      pkt.board_subtype=fwver.board_subtype,
+      pkt.major=fwver.major,
+      pkt.minor=fwver.minor,
+      pkt.patch=fwver.patch,
+      pkt.fw_type=fwver.fw_type,
+      pkt.git_hash=fwver.fw_hash,
+      pkt.build_type =fwver.vehicle_type,
+    /*log_VER pkt{
         LOG_PACKET_HEADER_INIT(LOG_VER_MSG),
         time_us  : AP_HAL::micros64(),
         board_type : fwver.board_type,
@@ -562,7 +575,9 @@ bool AP_Logger_Backend::Write_VER()
         fw_type: fwver.fw_type,
         git_hash: fwver.fw_hash,
         build_type: fwver.vehicle_type,
-    };
+    };*/
+
+
     strncpy(pkt.fw_string, fwver.fw_string, ARRAY_SIZE(pkt.fw_string)-1);
 
 #ifdef APJ_BOARD_ID
