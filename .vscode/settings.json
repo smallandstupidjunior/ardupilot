@@ -49,5 +49,6 @@
     "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google, IndentWidth: 4 }",
     // 粘贴时自动格式化
     "editor.formatOnPaste": false,
+    "git.path":"C:/C:/cygwin64/bin/git.exe"
 
 }
