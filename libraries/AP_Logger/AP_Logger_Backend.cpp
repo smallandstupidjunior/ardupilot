@@ -551,7 +551,7 @@ bool AP_Logger_Backend::Write_VER()
 {
     const AP_FWVersion &fwver = AP::fwversion();
 
-      log_VER pkt;
+     /* log_VER pkt;
       pkt.head1=HEAD_BYTE1;
       pkt.head2=HEAD_BYTE2;
       pkt.msgid=LOG_VER_MSG;
@@ -563,8 +563,8 @@ bool AP_Logger_Backend::Write_VER()
       pkt.patch=fwver.patch,
       pkt.fw_type=fwver.fw_type,
       pkt.git_hash=fwver.fw_hash,
-      pkt.build_type =fwver.vehicle_type,
-    /*log_VER pkt{
+      pkt.build_type =fwver.vehicle_type,*/
+    log_VER pkt{
         LOG_PACKET_HEADER_INIT(LOG_VER_MSG),
         time_us  : AP_HAL::micros64(),
         board_type : fwver.board_type,
@@ -575,7 +575,7 @@ bool AP_Logger_Backend::Write_VER()
         fw_type: fwver.fw_type,
         git_hash: fwver.fw_hash,
         build_type: fwver.vehicle_type,
-    };*/
+    }; 
 
 
     strncpy(pkt.fw_string, fwver.fw_string, ARRAY_SIZE(pkt.fw_string)-1);
