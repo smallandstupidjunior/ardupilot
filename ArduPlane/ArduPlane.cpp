@@ -349,6 +349,9 @@ void Plane::one_second_loop()
         !is_equal(G_Dt, scheduler.get_loop_period_s())) {
         INTERNAL_ERROR(AP_InternalError::error_t::flow_of_control);
     }
+    gcs().send_text(MAV_SEVERITY_CRITICAL, 
+                "Current altitude: %.1fm",
+                plane.get_RTL_altitude_cm() / 100.0f);
 }
 
 void Plane::three_hz_loop()

@@ -34,7 +34,7 @@
     // 不包含的文件夹
     "files.exclude": {
         "AntennaTracker/": true,
-        "ArduCopter/": true,  
+        "ArduCopter/": false,  
         "APMrover2": true,
         "ArduPlane/": false,// 如果使用的是固定翼固件，则将此文件夹的隐藏设置为"false" 
         "ArduSub/": true,
