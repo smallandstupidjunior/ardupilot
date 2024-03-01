@@ -371,7 +371,7 @@ void AP_Logger_Backend::validate_WritePrioritisedBlock(const void *pBuffer,
     if (size < 3) {
         AP_HAL::panic("Short prioritised block");
     }
-    if (((uint8_t*)pBuffer)[0] != H ||
+    if (((uint8_t*)pBuffer)[0] != HEAD_BYTE1  ||
         ((uint8_t*)pBuffer)[1] != HEAD_BYTE2) {
         AP_HAL::panic("Not passed a message");
     }
